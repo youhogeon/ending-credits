@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ending Credits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{assets/main.css}">
+</head>
+<body>
+    <h1>연결 상태</h1>
+    <div>
+        <div class="status">
+            <div class="status__title">투네이션</div>
+            <div class="status__value" id="toonationActive" th:text="${toonationActive} ? '연결됨' : '연결되지 않음'">연결되지 않음</div>
+        </div>
+        <div class="status">
+            <div class="status__title">트윕</div>
+            <div class="status__value" id="twipActive" th:text="${twipActive} ? '연결됨' : '연결되지 않음'">연결되지 않음</div>
+        </div>
+    </div>
+
+    <h1>설정</h1>
+
+    <form action="/api/config" method="post">
+        <h2>송출 시점</h2>
+        <input type="datetime-local" th:value="${lastCredits}" step="1" id="lastCredits" name="lastCredits">
+    
+        <div class="description">
+            설정한 시간 이후의 도네이션을 송출합니다.<br>
+            예상 송출 건수는 <span id="expectedCount">0</span>건입니다.<br>
+            엔딩 크레딧 송출 시, 이 시간은 송출 시점으로 자동으로 업데이트됩니다.<br>
+            (이전 송출 시점 이후의 도네이션을 보여주기 위함)
+        </div>
+
+        <h2>머릿말</h2>
+        <input type="text" th:value="${header}" name="header">
+
+        <h2>꼬릿말</h2>
+        <input type="text" th:value="${footer}" name="footer">
+
+        <h2>투네이션 인증키</h2>
+        <input type="password" th:value="${toonationKey}" name="toonationKey">
+    
+        <div class="description">
+            투네이션 위젯(Alert Box) URL 뒤의 인증키를 입력해주세요.<br>
+            https://toon.at/widget/alertbox/[이 부분의 값]
+        </div>
+
+        <h2>트윕 인증키</h2>
+        <input type="password" th:value="${twipKey}" name="twipKey">
+    
+        <div class="description">
+            트윕 위젯(Alert Box) URL 뒤의 인증키를 입력해주세요.<br>
+            https://twip.kr/widgets/alertbox/[이 부분의 값]
+        </div>
+
+        <input type="submit" value="저장">
+    </form>
+
+    <script th:src="@{assets/main.js}"></script>
+</body>
+</html>

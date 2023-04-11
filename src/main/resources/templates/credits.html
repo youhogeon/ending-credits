@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ending Credits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{assets/credits.css}">
+</head>
+<body>
+    <h1 th:text="${header}">도움 주신 분들</h1>
+
+    <h2 th:if="${!toonation.isEmpty()}">투네이션</h2>
+    <ul>
+        <li th:each="donation : ${toonation}">
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <h2 th:if="${!twip.isEmpty()}">트윕</h2>
+    <ul>
+        <li th:each="donation : ${twip}">
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <h2 th:if="${!bits.isEmpty()}">비트 후원</h2>
+    <ul>
+        <li th:each="donation : ${bits}">
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <h2 th:if="${!subscription.isEmpty()}">구독</h2>
+    <ul>
+        <li th:each="donation : ${subscription}">
+            <span class="tag" th:text="${donation.amount} + '개월'">태그</span>
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <h2 th:if="${!raid.isEmpty()}">호스팅</h2>
+    <ul>
+        <li th:each="donation : ${raid}">
+            <span class="tag" th:text="${donation.amount} + '명'">태그</span>
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <h2 th:if="${!follow.isEmpty()}">팔로우</h2>
+    <ul>
+        <li th:each="donation : ${follow}">
+            <span class="name" th:text="${donation.nickname}">닉네임</span>
+        </li>
+    </ul>
+
+    <footer th:text="${footer}">감사합니다.</footer>
+
+    <script th:src="@{assets/credits.js}"></script>
+</body>
+</html>
